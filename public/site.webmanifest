@@ -1,0 +1,11 @@
+{
+  "name": "Neeraj Solanki — ML Systems Engineer",
+  "short_name": "Neeraj Solanki",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#10191d",
+  "theme_color": "#10191d",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,423 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectVisual from '../components/ProjectVisual.astro';
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  Download,
+  GitBranch,
+  UserRound,
+  Mail,
+  ExternalLink,
+  BookOpen,
+  MapPin,
+} from '@lucide/astro';
+import { links, projects, publications, experience, expertise } from '../data/content';
+---
+
+<BaseLayout
+  title="Neeraj Solanki — ML Systems & Inference Engineer"
+  description="Neeraj Solanki builds efficient AI systems across model research, reproducible inference benchmarking, and hardware-aware deployment."
+  path="/"
+>
+  <section class="hero shell" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="status-dot"></span> AI/ML ENGINEER · ML SYSTEMS RESEARCHER
+      </p><h1 id="hero-title">
+        Making AI systems <em>measurably</em> faster, leaner, and more reliable.
+      </h1><p class="hero-lede">
+        I work from model design to accelerator deployment: adaptive inference, multimodal learning,
+        and benchmarks that explain what changes under real load.
+      </p><div class="hero-context">
+        <span><MapPin size={15} /> Chicago, Illinois</span><span
+          >University of Illinois Chicago</span
+        ><span>Former Qualcomm Cloud AI intern</span>
+      </div><div class="hero-cta">
+        <a class="button button-primary" href="#work">View projects <ArrowRight size={17} /></a><a
+          class="button button-outline"
+          href="#publications">Read publications</a
+        ><a class="button button-text" href={links.resume} download
+          >Download resume <Download size={16} /></a
+        >
+      </div><div class="hero-social">
+        <a href={links.github} target="_blank" rel="noopener noreferrer"
+          ><GitBranch size={16} /> GitHub</a
+        ><a href={links.linkedin} target="_blank" rel="noopener noreferrer"
+          ><UserRound size={16} /> LinkedIn</a
+        ><a href={links.scholar} target="_blank" rel="noopener noreferrer"
+          ><BookOpen size={16} /> Scholar</a
+        ><a href={links.email}><Mail size={16} /> Email</a>
+      </div>
+    </div>
+    <div
+      class="hero-visual"
+      role="img"
+      aria-label="Research-to-deployment pipeline: model, profile, optimize, validate, deploy"
+    >
+      <div class="visual-topline">
+        <span>RESEARCH → DEPLOYMENT</span><span class="live-signal"><span></span> SYSTEMS VIEW</span
+        >
+      </div><div class="system-stage">
+        <div class="system-nodes">
+          <div class="system-node">
+            <span>01 / MODEL</span><strong>Architecture</strong><small>adaptive · multimodal</small>
+          </div><div class="system-connector"></div><div class="system-node">
+            <span>02 / MEASURE</span><strong>Telemetry</strong><small
+              >latency · parity · power</small
+            >
+          </div><div class="system-connector"></div><div class="system-node">
+            <span>03 / DEPLOY</span><strong>Accelerator</strong><small
+              >validate · scale · serve</small
+            >
+          </div>
+        </div><div class="trace-panel">
+          <div class="trace-header">
+            <span>INFERENCE TRACE</span><span>p95 / throughput / parity</span>
+          </div><svg viewBox="0 0 420 115" preserveAspectRatio="none" aria-hidden="true"
+            ><path
+              class="trace-grid"
+              d="M0 20H420M0 55H420M0 90H420M80 0V115M180 0V115M280 0V115M380 0V115"></path><path
+              class="trace-muted"
+              d="M0 78 36 78 50 69 86 70 102 60 155 59 178 66 216 65 232 47 282 45 312 54 348 52 367 36 420 36"
+            ></path><path
+              class="trace-active"
+              d="M0 91 28 91 42 79 72 79 91 86 139 86 162 65 191 66 220 60 256 60 271 41 313 42 333 34 369 35 390 19 420 20"
+            ></path></svg
+          ><div class="trace-labels">
+            <span>INPUT</span><span>PROFILE</span><span>OPTIMIZE</span><span>VERIFY</span><span
+              >OUTPUT</span
+            >
+          </div>
+        </div>
+      </div><div class="visual-bottomline">
+        <span>CONTROLLED EXPERIMENTS</span><span>REAL HARDWARE</span><span
+          >REPRODUCIBLE RESULTS</span
+        >
+      </div>
+    </div>
+    <a class="scroll-cue" href="#impact">SCROLL TO EXPLORE <ArrowDown size={15} /></a>
+  </section>
+
+  <section class="impact-band" id="impact" aria-labelledby="impact-title">
+    <div class="shell">
+      <div class="section-intro inline-intro">
+        <p class="eyebrow">SELECTED IMPACT</p><h2 id="impact-title">Numbers with context.</h2>
+      </div><div class="impact-grid">
+        <a href="#qualcomm"
+          ><strong>7.05<span>×</span></strong><span
+            >up to higher throughput on Qualcomm Cloud AI 100 Ultra</span
+          ><ArrowUpRight size={17} /></a
+        ><a href="#qualcomm"
+          ><strong>41–52<span>%</span></strong><span
+            >less time to onboard models to the accelerator</span
+          ><ArrowUpRight size={17} /></a
+        ><a href="/projects/inferscope/"
+          ><strong>8,020</strong><span>logged InferScope benchmark records with 105 CI tests</span
+          ><ArrowUpRight size={17} /></a
+        ><a href="#uic"
+          ><strong>2<span>×</span></strong><span
+            >adaptive-inference throughput under compute constraints</span
+          ><ArrowUpRight size={17} /></a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell" id="work" aria-labelledby="work-title">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">01 / SELECTED WORK</p><h2 id="work-title">
+          Systems work, with the method visible.
+        </h2><p class="section-subtitle">
+          Three projects that connect research questions to measured behavior on real constraints.
+        </p>
+      </div><a class="inline-link" href={links.github} target="_blank" rel="noopener noreferrer"
+        >All repositories <ArrowUpRight size={17} /></a
+      >
+    </div><div class="filters" role="group" aria-label="Filter projects by topic">
+      <button type="button" data-filter="All" class="selected" aria-pressed="true">All</button
+      ><button type="button" data-filter="Inference" aria-pressed="false">Inference</button><button
+        type="button"
+        data-filter="Benchmarking"
+        aria-pressed="false">Benchmarking</button
+      ><button type="button" data-filter="Edge AI" aria-pressed="false">Edge AI</button><button
+        type="button"
+        data-filter="Multimodal"
+        aria-pressed="false">Multimodal</button
+      >
+    </div><div class="project-grid" id="project-grid">
+      {
+        projects.map((project, index) => (
+          <article
+            class:list={['project-card', { 'project-card-featured': index === 0 }]}
+            data-topics={project.topics.join('|')}
+          >
+            <>
+              <ProjectVisual visual={project.visual} />
+              <div class="project-body">
+                <>
+                  <div class="card-meta">
+                    <>
+                      <span>{project.kicker}</span>
+                      <span>{project.status}</span>
+                    </>
+                  </div>
+                  <div class="project-heading">
+                    <>
+                      <h3>{project.name}</h3>
+                      <span>0{index + 1}</span>
+                    </>
+                  </div>
+                  <p>{project.summary}</p>
+                  <div class="tags">
+                    {project.topics.map((topic) => (
+                      <span>{topic}</span>
+                    ))}
+                  </div>
+                  <div class="project-links">
+                    <>
+                      <a href={`/projects/${project.slug}/`}>
+                        Explore case study <ArrowRight size={16} />
+                      </a>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${project.name} on GitHub`}
+                      >
+                        <GitBranch size={18} />
+                      </a>
+                    </>
+                  </div>
+                </>
+              </div>
+            </>
+          </article>
+        ))
+      }
+    </div><p class="filter-empty" id="filter-empty" hidden>No projects match this topic.</p>
+  </section>
+
+  <section class="section section-alt" id="experience" aria-labelledby="experience-title">
+    <div class="shell">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">02 / EXPERIENCE</p><h2 id="experience-title">
+            From research to production.
+          </h2><p class="section-subtitle">
+            Model experiments, accelerator deployment, and shipping ML systems under operational
+            constraints.
+          </p>
+        </div>
+      </div><div class="timeline">
+        {
+          experience.map((role, index) => (
+            <article
+              class="timeline-item"
+              id={index === 0 ? 'qualcomm' : index === 1 ? 'uic' : 'deloitte'}
+            >
+              <>
+                <div class="timeline-date">
+                  <>
+                    <span>0{index + 1}</span>
+                    <time>{role.dates}</time>
+                  </>
+                </div>
+                <div class="timeline-content">
+                  <>
+                    <div class="timeline-title">
+                      <>
+                        <div>
+                          <>
+                            <h3>{role.organization}</h3>
+                            <p>{role.title}</p>
+                          </>
+                        </div>
+                        <span>{role.location}</span>
+                      </>
+                    </div>
+                    <ul>
+                      {role.bullets.map((bullet) => (
+                        <li>{bullet}</li>
+                      ))}
+                    </ul>
+                    <div class="tags">
+                      {role.stack.map((item) => (
+                        <span>{item}</span>
+                      ))}
+                    </div>
+                  </>
+                </div>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell" id="publications" aria-labelledby="publications-title">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">03 / RESEARCH</p><h2 id="publications-title">Published work.</h2><p
+          class="section-subtitle"
+        >
+          Edge intelligence, adaptive computation, privacy-aware sensing, and biosignal hardware.
+        </p>
+      </div><a class="inline-link" href={links.scholar} target="_blank" rel="noopener noreferrer"
+        >Google Scholar <ArrowUpRight size={17} /></a
+      >
+    </div><div class="publication-list">
+      {
+        publications.map((paper, index) => (
+          <article class:list={['publication', { 'publication-featured': index === 0 }]}>
+            <>
+              <div class="pub-index">
+                0{index + 1} / {paper.year}
+              </div>
+              <div>
+                <>
+                  <div class="pub-venue">
+                    {paper.venue} · {paper.year}
+                  </div>
+                  <h3>
+                    <a href={paper.url} target="_blank" rel="noopener noreferrer">
+                      {paper.title} <ArrowUpRight size={18} />
+                    </a>
+                  </h3>
+                  <p>{paper.summary}</p>
+                  <p class="pub-authors">{paper.authors}</p>
+                  <div class="tags">
+                    {paper.topics.map((topic) => (
+                      <span>{topic}</span>
+                    ))}
+                  </div>
+                </>
+              </div>
+              <a
+                class="paper-link"
+                href={paper.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Read ${paper.title}`}
+              >
+                <ExternalLink size={19} />
+              </a>
+            </>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section-alt" id="expertise" aria-labelledby="expertise-title">
+    <div class="shell">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">04 / CAPABILITIES</p><h2 id="expertise-title">
+            The toolkit behind the work.
+          </h2><p class="section-subtitle">
+            Grouped by what I build and measure, with depth reflected in the projects above.
+          </p>
+        </div>
+      </div><div class="expertise-grid">
+        {
+          expertise.map((group, index) => (
+            <article>
+              <>
+                <span class="expertise-index">0{index + 1}</span>
+                <h3>{group.heading}</h3>
+                <p>{group.details}</p>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell" id="about" aria-labelledby="about-title">
+    <div class="about-grid">
+      <div>
+        <p class="eyebrow">05 / ABOUT</p><h2 id="about-title">
+          I care about what happens after the model works.
+        </h2><p>
+          My work sits between research and systems engineering. I like turning an interesting model
+          result into a repeatable experiment, then asking what happens when it meets memory limits,
+          concurrent requests, or an accelerator with its own constraints.
+        </p><p>
+          At UIC I have studied adaptive and hardware-aware AI; at Qualcomm I worked on model
+          onboarding and inference evaluation. Earlier at Deloitte, production ML taught me to value
+          latency, observability, and honest comparisons. I’m interested in ML systems, inference,
+          applied research, and multimodal AI roles where those disciplines come together.
+        </p><div class="education">
+          <h3>Education</h3><div>
+            <strong>University of Illinois Chicago</strong><span
+              >MS, Computer Science · Aug 2024–May 2026 · GPA 3.63/4</span
+            >
+          </div><div>
+            <strong>MIT World Peace University</strong><span
+              >B.Tech, Computer Engineering · Jun 2018–Jun 2022 · GPA 3.6/4</span
+            >
+          </div>
+        </div>
+      </div><figure class="portrait-card">
+        <img
+          src="/images/neeraj-solanki.webp"
+          alt="Portrait of Neeraj Solanki"
+          width="640"
+          height="960"
+          loading="lazy"
+        /><figcaption><span>NEERAJ SOLANKI</span><span>CHICAGO, IL</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact" aria-labelledby="contact-title">
+    <div class="shell contact-inner">
+      <div>
+        <p class="eyebrow">06 / CONTACT</p><h2 id="contact-title">
+          Let’s build AI that holds up in practice.
+        </h2><p>
+          I’m open to conversations about ML systems, inference, applied research, and multimodal
+          AI.
+        </p><a class="button button-primary" href={links.email}
+          >Email me <ArrowUpRight size={18} /></a
+        >
+      </div><div class="contact-links">
+        <a href={links.email}>nsola5@uic.edu <ArrowUpRight size={17} /></a><a
+          href={links.linkedin}
+          target="_blank"
+          rel="noopener noreferrer">LinkedIn <ArrowUpRight size={17} /></a
+        ><a href={links.github} target="_blank" rel="noopener noreferrer"
+          >GitHub <ArrowUpRight size={17} /></a
+        ><a href={links.scholar} target="_blank" rel="noopener noreferrer"
+          >Google Scholar <ArrowUpRight size={17} /></a
+        ><a href={links.resume} download>Download resume <Download size={17} /></a>
+      </div>
+    </div>
+  </section>
+  <script>
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-topics]')];
+    buttons.forEach((button) =>
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter || 'All';
+        buttons.forEach((b) => {
+          const selected = b === button;
+          b.classList.toggle('selected', selected);
+          b.setAttribute('aria-pressed', String(selected));
+        });
+        cards.forEach(
+          (card) =>
+            (card.hidden =
+              filter !== 'All' && !(card.dataset.topics || '').split('|').includes(filter)),
+        );
+        const empty = document.querySelector<HTMLElement>('#filter-empty');
+        if (empty) empty.hidden = cards.some((card) => !card.hidden);
+      }),
+    );
+  </script>
+</BaseLayout>

@@ -1,0 +1,74 @@
+---
+import type { Project } from '../data/content';
+const { visual } = Astro.props as { visual: Project['visual'] };
+---
+
+<div class="project-visual" aria-hidden="true">
+  {
+    visual === 'chart' && (
+      <div class="visual-chart">
+        <>
+          <span>OUTPUT DIVERSITY / CONCURRENCY</span>
+          <svg viewBox="0 0 360 120" preserveAspectRatio="none">
+            <>
+              <path d="M12 100H350M12 58H350M12 16H350" class="chart-grid" />
+              <path d="M18 97 120 42 232 25 344 17" class="chart-line" />
+              <circle cx="18" cy="97" r="5" />
+              <circle cx="120" cy="42" r="5" />
+              <circle cx="232" cy="25" r="5" />
+              <circle cx="344" cy="17" r="5" />
+            </>
+          </svg>
+          <div class="visual-axis">
+            <>
+              <span>0</span>
+              <span>1</span>
+              <span>4</span>
+              <span>8</span>
+            </>
+          </div>
+        </>
+      </div>
+    )
+  }
+  {
+    visual === 'pipeline' && (
+      <div class="visual-pipeline">
+        <>
+          <span>CONSTRAINT-GUIDED SEARCH</span>
+          <div class="pipeline-node">
+            Hardware profile<small>RAM · ISA · POWER</small>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-node">
+            Candidate code<small>GENERATE · VALIDATE</small>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-node">
+            Energy trace<small>TUNE · MEASURE</small>
+          </div>
+        </>
+      </div>
+    )
+  }
+  {
+    visual === 'network' && (
+      <div class="visual-network">
+        <>
+          <span>INTERMITTENT FEDERATED LEARNING</span>
+          <svg viewBox="0 0 360 130">
+            <>
+              <path d="M180 62 60 100M180 62 105 25M180 62 260 20M180 62 308 103" />
+              <circle cx="180" cy="62" r="23" />
+              <circle cx="60" cy="100" r="13" />
+              <circle cx="105" cy="25" r="13" />
+              <circle cx="260" cy="20" r="13" />
+              <circle cx="308" cy="103" r="13" />
+              <circle cx="180" cy="62" r="5" class="node-core" />
+            </>
+          </svg>
+        </>
+      </div>
+    )
+  }
+</div>

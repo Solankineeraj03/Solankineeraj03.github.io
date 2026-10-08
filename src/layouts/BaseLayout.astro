@@ -1,0 +1,290 @@
+---
+import '../styles/global.css';
+import {
+  ArrowUpRight,
+  Download,
+  GitBranch,
+  UserRound,
+  Mail,
+  Moon,
+  Search,
+  Sun,
+  X,
+  Menu,
+} from '@lucide/astro';
+import { links, projects, publications } from '../data/content';
+const { title, description, path = '/' } = Astro.props;
+const canonical = new URL(path, Astro.site).toString();
+const image = new URL('/social-card.svg', Astro.site).toString();
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Neeraj Solanki',
+  url: 'https://solankineeraj03.github.io',
+  image: new URL('/images/neeraj-solanki.webp', Astro.site).toString(),
+  email: 'nsola5@uic.edu',
+  jobTitle: 'AI/ML Engineer and ML Systems Researcher',
+  homeLocation: { '@type': 'Place', name: 'Chicago, Illinois' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'University of Illinois Chicago' },
+    { '@type': 'CollegeOrUniversity', name: 'MIT World Peace University' },
+  ],
+  sameAs: [links.github, links.linkedin, links.scholar],
+  subjectOf: publications.map((paper) => ({
+    '@type': 'ScholarlyArticle',
+    headline: paper.title,
+    author: paper.authors.split(', ').map((name) => ({ '@type': 'Person', name })),
+    datePublished: String(paper.year),
+    url: paper.url,
+  })),
+  makesOffer: projects.map((project) => ({
+    '@type': 'CreativeWork',
+    name: project.name,
+    url: project.github,
+    description: project.summary,
+  })),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10191d" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Neeraj Solanki" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta
+      property="og:image:alt"
+      content="Neeraj Solanki — ML systems, efficient inference, and research"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
+    <script is:inline>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem('theme') ||
+          (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      } catch {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    </script>
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" id="top">
+      <div class="shell header-inner">
+        <a class="brand" href="/"
+          ><span class="brand-mark" aria-hidden="true">N<span>.</span></span><span
+            class="brand-text">NEERAJ SOLANKI<small>ML SYSTEMS / RESEARCH</small></span
+          ></a
+        >
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/#work">Work</a><a href="/#experience">Experience</a><a href="/#publications"
+            >Research</a
+          ><a href="/#about">About</a><a href="/#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button shortcut"
+            id="search-open"
+            type="button"
+            aria-label="Open command palette"
+            title="Search site (⌘/Ctrl + K)"><Search size={17} /><span>⌘ K</span></button
+          >
+          <button
+            class="icon-button"
+            id="theme-toggle"
+            type="button"
+            aria-label="Toggle color theme"
+            title="Toggle color theme"
+            ><Sun size={18} class="sun-icon" /><Moon size={18} class="moon-icon" /></button
+          >
+          <button
+            class="icon-button menu-button"
+            id="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Open navigation"><Menu size={20} /></button
+          >
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden>
+        <a href="/#work">Work</a><a href="/#experience">Experience</a><a href="/#publications"
+          >Research</a
+        ><a href="/#about">About</a><a href="/#contact">Contact</a>
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <div>
+          <strong>Neeraj Solanki</strong><span
+            >ML systems, from model design to measured deployment.</span
+          >
+        </div><div class="footer-links">
+          <a
+            href={links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"><GitBranch size={18} /></a
+          ><a
+            href={links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"><UserRound size={18} /></a
+          ><a href={links.email} aria-label="Email Neeraj"><Mail size={18} /></a><a
+            href="#top"
+            class="back-top">Back to top ↑</a
+          >
+        </div>
+      </div>
+    </footer>
+    <dialog class="command-dialog" id="command-dialog" aria-label="Navigate portfolio">
+      <div class="command-head">
+        <Search size={19} /><input
+          id="command-query"
+          type="search"
+          placeholder="Go to a page, project, or link…"
+          aria-label="Search navigation commands"
+          autocomplete="off"
+        /><button
+          class="icon-button"
+          id="search-close"
+          type="button"
+          aria-label="Close command palette"><X size={18} /></button
+        >
+      </div><div class="command-results" id="command-results">
+        <span class="command-label">Navigate</span>
+        <a href="/#work" data-search="projects work"
+          ><span>Selected projects</span><ArrowUpRight size={16} /></a
+        >
+        <a href="/projects/inferscope/" data-search="inferscope inference benchmarking"
+          ><span>InferScope case study</span><ArrowUpRight size={16} /></a
+        >
+        <a href="/projects/chai/" data-search="chai hardware edge"
+          ><span>CHAI case study</span><ArrowUpRight size={16} /></a
+        >
+        <a href="/projects/flare/" data-search="flare federated learning"
+          ><span>FLARE case study</span><ArrowUpRight size={16} /></a
+        >
+        <a href="/#publications" data-search="publications research papers"
+          ><span>Publications</span><ArrowUpRight size={16} /></a
+        >
+        <a href="/#contact" data-search="contact email"
+          ><span>Contact</span><ArrowUpRight size={16} /></a
+        >
+        <a href={links.resume} data-search="resume cv download" download
+          ><span>Download resume</span><Download size={16} /></a
+        >
+        <a
+          href={links.github}
+          data-search="github repositories"
+          target="_blank"
+          rel="noopener noreferrer"><span>GitHub</span><ArrowUpRight size={16} /></a
+        >
+        <a
+          href={links.scholar}
+          data-search="scholar citations"
+          target="_blank"
+          rel="noopener noreferrer"><span>Google Scholar</span><ArrowUpRight size={16} /></a
+        >
+      </div><div class="command-foot">↑ ↓ to move · Enter to open · Esc to close</div>
+    </dialog>
+    <script>
+      const themeButton = document.querySelector<HTMLButtonElement>('#theme-toggle');
+      themeButton?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try {
+          localStorage.setItem('theme', next);
+        } catch {
+          /* private mode */
+        }
+      });
+      const menuButton = document.querySelector<HTMLButtonElement>('#menu-toggle');
+      const mobileNav = document.querySelector<HTMLElement>('#mobile-nav');
+      menuButton?.addEventListener('click', () => {
+        if (!mobileNav) return;
+        mobileNav.hidden = !mobileNav.hidden;
+        menuButton.setAttribute('aria-expanded', String(!mobileNav.hidden));
+        menuButton.setAttribute(
+          'aria-label',
+          mobileNav.hidden ? 'Open navigation' : 'Close navigation',
+        );
+      });
+      mobileNav?.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => {
+          mobileNav.hidden = true;
+          menuButton?.setAttribute('aria-expanded', 'false');
+        }),
+      );
+      const dialog = document.querySelector<HTMLDialogElement>('#command-dialog');
+      const query = document.querySelector<HTMLInputElement>('#command-query');
+      const results = [...document.querySelectorAll<HTMLAnchorElement>('#command-results a')];
+      let active = 0;
+      const visible = () => results.filter((a) => !a.hidden);
+      const mark = () =>
+        results.forEach((a) => a.classList.toggle('active', a === visible()[active]));
+      const open = () => {
+        dialog?.showModal();
+        if (query) {
+          query.value = '';
+          results.forEach((a) => (a.hidden = false));
+          active = 0;
+          mark();
+          query.focus();
+        }
+      };
+      document.querySelector('#search-open')?.addEventListener('click', open);
+      document.querySelector('#search-close')?.addEventListener('click', () => dialog?.close());
+      dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+      results.forEach((a) => a.addEventListener('click', () => dialog?.close()));
+      document.addEventListener('keydown', (event) => {
+        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+          event.preventDefault();
+          dialog?.open ? dialog.close() : open();
+        }
+        if (!dialog?.open) return;
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          active = (active + 1) % Math.max(visible().length, 1);
+          mark();
+        }
+        if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          active = (active - 1 + Math.max(visible().length, 1)) % Math.max(visible().length, 1);
+          mark();
+        }
+        if (event.key === 'Enter' && document.activeElement === query && visible()[active]) {
+          event.preventDefault();
+          visible()[active].click();
+        }
+      });
+      query?.addEventListener('input', () => {
+        const term = query.value.trim().toLowerCase();
+        results.forEach(
+          (a) =>
+            (a.hidden = !((a.dataset.search || '') + a.textContent).toLowerCase().includes(term)),
+        );
+        active = 0;
+        mark();
+      });
+    </script>
+  </body>
+</html>

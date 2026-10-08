@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://solankineeraj03.github.io/sitemap-index.xml

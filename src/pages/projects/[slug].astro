@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectVisual from '../../components/ProjectVisual.astro';
+import { ArrowLeft, ArrowUpRight, GitBranch, BookOpen } from '@lucide/astro';
+import { projects, benchmark } from '../../data/content';
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+const { project } = Astro.props;
+---
+
+<BaseLayout
+  title={`${project.name} — Neeraj Solanki`}
+  description={project.summary}
+  path={`/projects/${project.slug}/`}
+>
+  <article class="case-study shell">
+    <a class="back-link" href="/#work"><ArrowLeft size={16} /> All projects</a><div
+      class="case-hero"
+    >
+      <div>
+        <p class="eyebrow">CASE STUDY / {project.kicker.toUpperCase()}</p><h1>{project.name}</h1><p
+          class="case-summary"
+        >
+          {project.summary}
+        </p><div class="tags">
+          {project.topics.map((topic: string) => <span>{topic}</span>)}
+        </div><div class="case-cta">
+          <a
+            class="button button-primary"
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer">View repository <GitBranch size={17} /></a
+          >{
+            project.link && (
+              <a
+                class="button button-outline"
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read paper <BookOpen size={17} />
+              </a>
+            )
+          }
+        </div>
+      </div><ProjectVisual visual={project.visual} />
+    </div><div class="case-body">
+      <div class="case-aside">
+        <span>PROJECT BRIEF</span><div>
+          <span>Status</span><strong>{project.status}</strong>
+        </div><div><span>Technologies</span><strong>{project.stack.join(' · ')}</strong></div><div>
+          <span>Source</span><a href={project.github} target="_blank" rel="noopener noreferrer"
+            >GitHub repository <ArrowUpRight size={15} /></a
+          >
+        </div>
+      </div><div class="case-content">
+        <section>
+          <p class="eyebrow">01 / THE PROBLEM</p><h2>What needed to change</h2><p>
+            {project.problem}
+          </p>
+        </section><section>
+          <p class="eyebrow">02 / APPROACH</p><h2>How I approached it</h2><p>{project.approach}</p>
+        </section><section>
+          <p class="eyebrow">03 / EVIDENCE</p><h2>What the evidence says</h2><p>{project.result}</p>
+        </section>{
+          project.slug === 'inferscope' && (
+            <section class="benchmark-section" id="benchmark">
+              <>
+                <p class="eyebrow">04 / MEASURED DATA</p>
+                <h2>Load changes both speed and output diversity.</h2>
+                <p>
+                  Qwen2.5-7B-Instruct, BF16, vLLM 0.19.1, one RTX 3090, greedy decoding, prefix
+                  caching disabled. The same <code>code_00</code> prompt was issued 50 times per
+                  concurrency condition for the diversity series. System throughput includes
+                  background requests.
+                </p>
+                <div class="metric-tabs" role="group" aria-label="Benchmark metric">
+                  <>
+                    <button
+                      type="button"
+                      data-metric="distinctOutputs"
+                      class="selected"
+                      aria-pressed="true"
+                    >
+                      Distinct outputs
+                    </button>
+                    <button type="button" data-metric="throughput" aria-pressed="false">
+                      System throughput
+                    </button>
+                  </>
+                </div>
+                <div class="benchmark-chart">
+                  <>
+                    <div class="chart-y-label" id="chart-label">
+                      Distinct outputs from 50 identical requests
+                    </div>
+                    <svg
+                      id="benchmark-svg"
+                      viewBox="0 0 520 230"
+                      role="img"
+                      aria-label="Distinct outputs rise from 1 at concurrency 0 to 20 at concurrency 8"
+                    >
+                      <>
+                        <path
+                          class="grid"
+                          d="M52 25H500M52 71H500M52 117H500M52 163H500M52 209H500"
+                        />
+                        <path
+                          id="benchmark-path"
+                          class="series"
+                          d="M62 199 L203 80 L344 43 L485 25"
+                        />
+                        <g id="benchmark-points">
+                          <>
+                            <circle cx="62" cy="199" r="6" />
+                            <circle cx="203" cy="80" r="6" />
+                            <circle cx="344" cy="43" r="6" />
+                            <circle cx="485" cy="25" r="6" />
+                          </>
+                        </g>
+                        <text x="50" y="226">
+                          0
+                        </text>
+                        <text x="195" y="226">
+                          1
+                        </text>
+                        <text x="336" y="226">
+                          4
+                        </text>
+                        <text x="477" y="226">
+                          8
+                        </text>
+                      </>
+                    </svg>
+                    <div class="chart-values" id="chart-values">
+                      <>
+                        <span>1</span>
+                        <span>14</span>
+                        <span>18</span>
+                        <span>20</span>
+                      </>
+                    </div>
+                    <div class="chart-axis">Concurrent background requests</div>
+                  </>
+                </div>
+                <div class="table-scroll">
+                  <table>
+                    <>
+                      <caption>Measured InferScope C1 results by concurrency</caption>
+                      <thead>
+                        <tr>
+                          <>
+                            <th scope="col">Concurrency</th>
+                            <th scope="col">Distinct outputs, code_00</th>
+                            <th scope="col">System output tokens/s</th>
+                          </>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {benchmark.concurrency.map((value, index) => (
+                          <tr>
+                            <th scope="row">{value}</th>
+                            <td>{benchmark.distinctOutputs[index]}</td>
+                            <td>{benchmark.throughput[index].toFixed(1)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </>
+                  </table>
+                </div>
+                <p class="source-note">
+                  Source:{' '}
+                  <a href={benchmark.source} target="_blank" rel="noopener noreferrer">
+                    InferScope week-one results and README <ArrowUpRight size={14} />
+                  </a>
+                  . These are observational measurements from one model, runtime, build, and host.
+                  The AWQ INT4 comparison was pending in the reviewed repository.
+                </p>
+              </>
+            </section>
+          )
+        }
+      </div>
+    </div><div class="case-next">
+      <span>MORE WORK</span><a href="/#work">Explore all projects <ArrowUpRight size={18} /></a>
+    </div>
+  </article>
+  <script>
+    const values = { distinctOutputs: [1, 14, 18, 20], throughput: [34.8, 60.7, 123.1, 181.7] };
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-metric]')];
+    tabs.forEach((tab) =>
+      tab.addEventListener('click', () => {
+        const metric = tab.dataset.metric === 'throughput' ? 'throughput' : 'distinctOutputs';
+        const series = values[metric];
+        const max = metric === 'throughput' ? 200 : 20;
+        const coords = series.map((v, i) => [62 + 141 * i, 209 - (v / max) * 184]);
+        document
+          .querySelector('#benchmark-path')
+          ?.setAttribute('d', coords.map(([x, y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' '));
+        const points = document.querySelector('#benchmark-points');
+        if (points)
+          points.innerHTML = coords.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="6"/>`).join('');
+        const text =
+          metric === 'throughput'
+            ? 'System output tokens per second'
+            : 'Distinct outputs from 50 identical requests';
+        const label = document.querySelector('#chart-label');
+        if (label) label.textContent = text;
+        const svg = document.querySelector('#benchmark-svg');
+        svg?.setAttribute('aria-label', `${text}: ${series.join(', ')} at concurrency 0, 1, 4, 8`);
+        const valueRow = document.querySelector('#chart-values');
+        if (valueRow)
+          valueRow.innerHTML = series
+            .map((v) => `<span>${metric === 'throughput' ? v.toFixed(1) : v}</span>`)
+            .join('');
+        tabs.forEach((b) => {
+          const selected = b === tab;
+          b.classList.toggle('selected', selected);
+          b.setAttribute('aria-pressed', String(selected));
+        });
+      }),
+    );
+  </script>
+</BaseLayout>
