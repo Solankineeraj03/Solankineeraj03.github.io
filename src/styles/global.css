@@ -340,12 +340,7 @@ p {
   color: var(--accent);
 }
 :root[data-theme='light'] .hero h1 em {
-  background: var(--accent-fill);
-  color: var(--accent-ink);
-  border-radius: 0.04em;
-  padding-inline: 0.04em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  color: #866400;
 }
 .hero-lede {
   max-width: 630px;
