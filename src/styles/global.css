@@ -8,11 +8,11 @@
   --muted: #c1b9a9;
   --dim: #a8a296;
   --line: #3d4140;
-  --accent: #f2c866;
-  --accent-fill: #f2c866;
-  --accent-fill-hover: #ffdc82;
-  --accent-ink: #251c0b;
-  --soft: #30291c;
+  --accent: #ffe100;
+  --accent-fill: #ffe100;
+  --accent-fill-hover: #fff04d;
+  --accent-ink: #201b00;
+  --soft: #312d10;
   --header: rgba(19, 21, 24, 0.92);
 }
 :root[data-theme='light'] {
@@ -24,11 +24,11 @@
   --muted: #625b50;
   --dim: #6c655b;
   --line: #d9d1c0;
-  --accent: #835b00;
-  --accent-fill: #f0bd44;
-  --accent-fill-hover: #e5b02e;
-  --accent-ink: #251c0b;
-  --soft: #f6ecd6;
+  --accent: #705400;
+  --accent-fill: #ffdf00;
+  --accent-fill-hover: #f1d000;
+  --accent-ink: #201b00;
+  --soft: #fff5c6;
   --header: rgba(250, 248, 241, 0.92);
 }
 * {
@@ -130,7 +130,7 @@ a:hover {
   height: 6px;
   display: inline-block;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-fill);
   box-shadow: 0 0 0 4px var(--soft);
 }
 h1,
@@ -338,6 +338,14 @@ p {
 .hero h1 em {
   font-style: normal;
   color: var(--accent);
+}
+:root[data-theme='light'] .hero h1 em {
+  background: var(--accent-fill);
+  color: var(--accent-ink);
+  border-radius: 0.04em;
+  padding-inline: 0.04em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .hero-lede {
   max-width: 630px;
