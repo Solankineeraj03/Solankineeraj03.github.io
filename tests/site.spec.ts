@@ -71,3 +71,14 @@ test('reduced motion does not hide content or controls', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Open command palette' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'InferScope' })).toBeVisible();
 });
+
+test('case studies fit narrow viewports', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const slug of ['inferscope', 'chai', 'flare']) {
+    await page.goto(`/projects/${slug}/`);
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth > window.innerWidth + 1,
+    );
+    expect(overflow, `${slug} should fit the viewport`).toBe(false);
+  }
+});

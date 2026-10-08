@@ -1217,9 +1217,12 @@ p {
 }
 .case-body {
   display: grid;
-  grid-template-columns: 245px 1fr;
+  grid-template-columns: 245px minmax(0, 1fr);
   gap: 9%;
   padding-top: 60px;
+}
+.case-content {
+  min-width: 0;
 }
 .case-aside {
   align-self: start;
@@ -1500,7 +1503,7 @@ code {
     max-width: 650px;
   }
   .case-body {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 35px;
   }
   .case-aside {
