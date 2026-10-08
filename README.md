@@ -37,7 +37,7 @@ npm test
 
 The repository is the GitHub user site, so Astro uses `https://solankineeraj03.github.io` with no base path. On a push to `main`, GitHub Actions runs lint, type checks, a production build, and browser tests before deploying `dist` to GitHub Pages. The project has no runtime backend, tracking scripts, or browser API keys.
 
-![Portfolio social preview](public/social-card.svg)
+![Portfolio social preview](public/social-card.png)
 
 ## License
 

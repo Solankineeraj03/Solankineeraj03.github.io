@@ -4,6 +4,11 @@ test('home has working content and downloadable resume', async ({ page, request 
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /Making AI systems/ })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Published work.' })).toBeVisible();
+  const sitemap = await request.get('/sitemap.xml');
+  expect(sitemap.ok()).toBeTruthy();
+  expect(await sitemap.text()).toContain('/projects/inferscope/');
+  const social = await request.get('/social-card.png');
+  expect(social.ok()).toBeTruthy();
   const resume = await request.get('/resume/Neeraj_Solanki_Resume.pdf');
   expect(resume.ok()).toBeTruthy();
   expect(resume.headers()['content-type']).toContain('pdf');

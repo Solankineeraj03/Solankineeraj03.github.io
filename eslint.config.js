@@ -11,7 +11,13 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: { sourceType: 'module', ecmaVersion: 'latest' },
-      globals: { process: 'readonly', document: 'readonly', window: 'readonly' },
+      globals: {
+        process: 'readonly',
+        URL: 'readonly',
+        Response: 'readonly',
+        document: 'readonly',
+        window: 'readonly',
+      },
     },
     plugins: { '@typescript-eslint': tsPlugin },
     rules: { ...tsPlugin.configs.recommended.rules },
