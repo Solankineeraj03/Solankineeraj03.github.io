@@ -38,7 +38,6 @@ export function initHeroField() {
 
   const hudStep = document.querySelector('#hud-step');
   const hudTokens = document.querySelector('#hud-tokens');
-  const hudPaths = document.querySelector('#hud-paths');
 
   /* ---------- colors from the theme ---------- */
   let accent: [number, number, number] = [255, 225, 0];
@@ -109,13 +108,12 @@ export function initHeroField() {
     if (R() < 0.45) picks.add(next[Math.floor(R() * next.length)].idx);
     n.out = [...picks];
   }
-  const edgeCount = nodes.reduce((s, n) => s + n.out.length, 0);
 
   // ambient dust
   const dust = Array.from({ length: 140 }, () => ({
-    x: (R() - 0.5) * 26,
+    x: (R() - 0.5) * 16,
     y: (R() - 0.5) * 12,
-    z: (R() - 0.5) * 16,
+    z: (R() - 0.5) * 8,
     v: 0.15 + R() * 0.35,
   }));
 
@@ -155,6 +153,7 @@ export function initHeroField() {
   let cx = 0;
   let cy = 0;
   let focal = 0;
+  let squash = 1;
   const project = (x: number, y: number, z: number): [number, number, number] | null => {
     const cyw = Math.cos(yaw);
     const syw = Math.sin(yaw);
@@ -165,7 +164,7 @@ export function initHeroField() {
     const y1 = y * cp - z1 * sp;
     const z2 = y * sp + z1 * cp + 17;
     if (z2 < 1) return null;
-    return [cx + (x1 / z2) * focal, cy + (y1 / z2) * focal, z2];
+    return [cx + (x1 / z2) * focal, cy + (y1 / z2) * focal * squash, z2];
   };
 
   /* ---------- render ---------- */
@@ -180,12 +179,13 @@ export function initHeroField() {
     mx += (tx - mx) * 0.05;
     my += (ty - my) * 0.05;
 
-    const wide = W > 800;
-    cx = wide ? W * (0.66 - mx * 0.04) : W * 0.5;
-    cy = H * (wide ? 0.46 : 0.3) + my * 18;
-    focal = Math.min(W, H * 1.6) * (wide ? 0.95 : 1.15);
-    yaw = (reduced ? -0.5 : -0.55 + Math.sin(t * 0.12) * 0.2) + mx * 0.5;
-    pitch = (reduced ? 0.18 : 0.16 + Math.sin(t * 0.09) * 0.05) + my * 0.25;
+    // Layers run left to right so they line up with the INPUT → OUTPUT labels below the panel.
+    cx = W * 0.5 + mx * 10;
+    cy = H * 0.5 + my * 6;
+    focal = (W * 0.92 * 17) / spanX;
+    squash = Math.min(1, (H * 0.44) / ((4 / 17) * focal));
+    yaw = (reduced ? 0.06 : Math.sin(t * 0.15) * 0.1) + mx * 0.14;
+    pitch = (reduced ? 0.35 : 0.35 + Math.sin(t * 0.11) * 0.08) + my * 0.12;
 
     g.clearRect(0, 0, W, H);
 
@@ -193,7 +193,7 @@ export function initHeroField() {
     for (const d of dust) {
       if (!reduced) {
         d.x += d.v * dt;
-        if (d.x > 13) d.x -= 26;
+        if (d.x > 8) d.x -= 16;
       }
       const p = project(d.x, d.y, d.z);
       if (!p) continue;
@@ -291,7 +291,6 @@ export function initHeroField() {
     if (frame % 6 === 0 || reduced) {
       if (hudStep) hudStep.textContent = String(frame).padStart(6, '0');
       if (hudTokens) hudTokens.textContent = routed.toLocaleString('en-US');
-      if (hudPaths) hudPaths.textContent = `${tokens.length}/${edgeCount}`;
     }
   }
 

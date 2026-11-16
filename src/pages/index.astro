@@ -44,97 +44,78 @@ const ticker = [
   description="Neeraj Solanki builds efficient AI systems across model research, reproducible inference benchmarking, and hardware-aware deployment."
   path="/"
 >
-  <div class="hero-wrap">
-    <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
-    <section class="hero shell" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">
-          <span class="status-dot"></span> AI/ML ENGINEER · ML SYSTEMS RESEARCHER
-        </p><h1 id="hero-title" data-split>
-          Making AI systems <em>measurably</em> faster, leaner, and more reliable.
-        </h1><p class="hero-lede">
-          I work from model design to accelerator deployment: adaptive inference, multimodal
-          learning, and benchmarks that explain what changes under real load.
-        </p><div class="hero-context">
-          <span><MapPin size={15} /> Chicago, Illinois</span><span
-            >University of Illinois Chicago</span
-          ><span>Former Qualcomm Cloud AI intern</span>
-        </div><div class="hero-cta">
-          <a class="button button-primary mag" href="#work"
-            >View projects <ArrowRight size={17} /></a
-          ><a class="button button-outline mag" href="#publications">Read publications</a><a
-            class="button button-text"
-            href={links.resume}
-            download>Download resume <Download size={16} /></a
-          >
-        </div><div class="hero-social">
-          <a href={links.github} target="_blank" rel="noopener noreferrer"
-            ><GitBranch size={16} /> GitHub</a
-          ><a href={links.linkedin} target="_blank" rel="noopener noreferrer"
-            ><UserRound size={16} /> LinkedIn</a
-          ><a href={links.scholar} target="_blank" rel="noopener noreferrer"
-            ><BookOpen size={16} /> Scholar</a
-          ><a href={links.email}><Mail size={16} /> Email</a>
-        </div>
+  <section class="hero shell" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="status-dot"></span> AI/ML ENGINEER · ML SYSTEMS RESEARCHER
+      </p><h1 id="hero-title" data-split>
+        Making AI systems <em>measurably</em> faster, leaner, and more reliable.
+      </h1><p class="hero-lede">
+        I work from model design to accelerator deployment: adaptive inference, multimodal learning,
+        and benchmarks that explain what changes under real load.
+      </p><div class="hero-context">
+        <span><MapPin size={15} /> Chicago, Illinois</span><span
+          >University of Illinois Chicago</span
+        ><span>Former Qualcomm Cloud AI intern</span>
+      </div><div class="hero-cta">
+        <a class="button button-primary mag" href="#work">View projects <ArrowRight size={17} /></a
+        ><a class="button button-outline mag" href="#publications">Read publications</a><a
+          class="button button-text"
+          href={links.resume}
+          download>Download resume <Download size={16} /></a
+        >
+      </div><div class="hero-social">
+        <a href={links.github} target="_blank" rel="noopener noreferrer"
+          ><GitBranch size={16} /> GitHub</a
+        ><a href={links.linkedin} target="_blank" rel="noopener noreferrer"
+          ><UserRound size={16} /> LinkedIn</a
+        ><a href={links.scholar} target="_blank" rel="noopener noreferrer"
+          ><BookOpen size={16} /> Scholar</a
+        ><a href={links.email}><Mail size={16} /> Email</a>
       </div>
-      <div
-        class="hero-visual"
-        role="img"
-        aria-label="Research-to-deployment pipeline: model, profile, optimize, validate, deploy"
-      >
-        <div class="visual-topline">
-          <span>RESEARCH → DEPLOYMENT</span><span class="live-signal"
-            ><span></span> SYSTEMS VIEW</span
-          >
-        </div><div class="system-stage">
-          <div class="system-nodes">
-            <div class="system-node">
-              <span>01 / MODEL</span><strong>Architecture</strong><small
-                >adaptive · multimodal</small
-              >
-            </div><div class="system-connector"></div><div class="system-node">
-              <span>02 / MEASURE</span><strong>Telemetry</strong><small
-                >latency · parity · power</small
-              >
-            </div><div class="system-connector"></div><div class="system-node">
-              <span>03 / DEPLOY</span><strong>Accelerator</strong><small
-                >validate · scale · serve</small
-              >
-            </div>
-          </div><div class="trace-panel">
-            <div class="trace-header">
-              <span>INFERENCE TRACE</span><span>p95 / throughput / parity</span>
-            </div><svg viewBox="0 0 420 115" preserveAspectRatio="none" aria-hidden="true"
-              ><path
-                class="trace-grid"
-                d="M0 20H420M0 55H420M0 90H420M80 0V115M180 0V115M280 0V115M380 0V115"></path><path
-                class="trace-muted"
-                d="M0 78 36 78 50 69 86 70 102 60 155 59 178 66 216 65 232 47 282 45 312 54 348 52 367 36 420 36"
-              ></path><path
-                class="trace-active"
-                d="M0 91 28 91 42 79 72 79 91 86 139 86 162 65 191 66 220 60 256 60 271 41 313 42 333 34 369 35 390 19 420 20"
-              ></path></svg
-            ><div class="trace-labels">
-              <span>INPUT</span><span>PROFILE</span><span>OPTIMIZE</span><span>VERIFY</span><span
-                >OUTPUT</span
-              >
-            </div>
+    </div>
+    <div
+      class="hero-visual"
+      role="img"
+      aria-label="Research-to-deployment pipeline: model, profile, optimize, validate, deploy"
+    >
+      <div class="visual-topline">
+        <span>RESEARCH → DEPLOYMENT</span><span class="live-signal"><span></span> SYSTEMS VIEW</span
+        >
+      </div><div class="system-stage">
+        <div class="system-nodes">
+          <div class="system-node">
+            <span>01 / MODEL</span><strong>Architecture</strong><small>adaptive · multimodal</small>
+          </div><div class="system-connector"></div><div class="system-node">
+            <span>02 / MEASURE</span><strong>Telemetry</strong><small
+              >latency · parity · power</small
+            >
+          </div><div class="system-connector"></div><div class="system-node">
+            <span>03 / DEPLOY</span><strong>Accelerator</strong><small
+              >validate · scale · serve</small
+            >
           </div>
-        </div><div class="visual-bottomline">
-          <span>CONTROLLED EXPERIMENTS</span><span>REAL HARDWARE</span><span
-            >REPRODUCIBLE RESULTS</span
+        </div><div class="trace-panel">
+          <div class="trace-header">
+            <span>INFERENCE TRACE · SIMULATED LIVE</span><span
+              >step <b id="hud-step">000000</b> · tokens <b id="hud-tokens">0</b></span
+            >
+          </div><canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas><div
+            class="trace-labels"
           >
+            <span>INPUT</span><span>PROFILE</span><span>OPTIMIZE</span><span>VERIFY</span><span
+              >OUTPUT</span
+            >
+          </div>
         </div>
-      </div>
-      <a class="scroll-cue" href="#impact">SCROLL TO EXPLORE <ArrowDown size={15} /></a>
-      <div class="field-hud" aria-hidden="true">
-        <span>SIMULATED TOKEN FLOW · DRAWN LIVE</span><span>step <b id="hud-step">000000</b></span
-        ><span>tokens <b id="hud-tokens">0</b></span><span
-          >active paths <b id="hud-paths">0</b></span
+      </div><div class="visual-bottomline">
+        <span>CONTROLLED EXPERIMENTS</span><span>REAL HARDWARE</span><span
+          >REPRODUCIBLE RESULTS</span
         >
       </div>
-    </section>
-  </div>
+    </div>
+    <a class="scroll-cue" href="#impact">SCROLL TO EXPLORE <ArrowDown size={15} /></a>
+  </section>
 
   <section class="impact-band" id="impact" aria-labelledby="impact-title">
     <div class="shell">
@@ -160,14 +141,6 @@ const ticker = [
         >
       </div>
     </div>
-  </section>
-
-  <section class="statement shell" aria-label="Approach">
-    <p id="statement">
-      I care about what happens <span class="hl">after</span> the model works: memory limits,
-      <span class="hl">concurrent</span> requests, accelerators with their own constraints, and results
-      that <span class="hl">hold</span> up when someone else reruns them.
-    </p>
   </section>
 
   <section class="section shell" id="work" aria-labelledby="work-title">

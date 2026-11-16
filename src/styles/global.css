@@ -491,26 +491,16 @@ p {
 .trace-header span:first-child {
   color: var(--accent);
 }
-.trace-panel svg {
+.trace-panel .hero-field {
   display: block;
   width: 100%;
-  height: 120px;
-  margin: 16px 0 9px;
+  height: 150px;
+  margin: 12px 0 9px;
 }
-.trace-grid {
-  stroke: var(--line);
-  stroke-width: 0.8;
-  fill: none;
-}
-.trace-muted {
-  stroke: #8e887c;
-  stroke-width: 2;
-  fill: none;
-}
-.trace-active {
-  stroke: var(--accent);
-  stroke-width: 2.5;
-  fill: none;
+.trace-header b {
+  color: var(--ink);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 .scroll-cue {
   position: absolute;
@@ -1584,8 +1574,8 @@ code {
   .system-connector {
     flex-basis: 8px;
   }
-  .trace-panel svg {
-    height: 80px;
+  .trace-panel .hero-field {
+    height: 120px;
   }
   .trace-header span:last-child {
     display: none;
@@ -1782,104 +1772,6 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* ---------- hero field ---------- */
-.hero-wrap {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-.hero-field {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: -1;
-  pointer-events: none;
-  -webkit-mask-image:
-    linear-gradient(to right, transparent 0%, #000 38%, #000 100%),
-    linear-gradient(to top, transparent 0%, #000 22%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to right, transparent 0%, #000 38%, #000 100%),
-    linear-gradient(to top, transparent 0%, #000 22%);
-  mask-composite: intersect;
-}
-.hero-visual {
-  background: linear-gradient(
-    155deg,
-    color-mix(in srgb, var(--surface) 86%, transparent),
-    color-mix(in srgb, var(--bg) 78%, transparent)
-  );
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-.field-hud {
-  position: absolute;
-  right: 0;
-  bottom: 30px;
-  display: flex;
-  gap: 18px;
-  color: var(--dim);
-  font:
-    700 10px ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    monospace;
-  letter-spacing: 0.09em;
-  font-variant-numeric: tabular-nums;
-}
-.field-hud span:first-child {
-  color: var(--accent);
-}
-.field-hud b {
-  color: var(--ink);
-  font-weight: 700;
-}
-
-/* hero trace draws itself */
-.trace-active {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  animation: draw 2.4s 0.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-}
-.system-connector {
-  overflow: visible;
-}
-.system-connector:before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent-fill);
-  animation: hop 1.8s ease-in-out infinite;
-}
-.system-node:nth-child(3) + .system-connector:before {
-  animation-delay: 0.9s;
-}
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-@keyframes hop {
-  0% {
-    transform: translateX(-2px);
-    opacity: 0;
-  }
-  20%,
-  80% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(14px);
-    opacity: 0;
-  }
-}
-
 /* ---------- split headings ---------- */
 .sw {
   display: inline-block;
@@ -1897,33 +1789,6 @@ html.lenis body {
 .impact-grid strong b {
   font-weight: inherit;
   font-variant-numeric: tabular-nums;
-}
-
-/* ---------- statement ---------- */
-.statement {
-  padding-top: clamp(90px, 12vw, 160px);
-  padding-bottom: clamp(30px, 5vw, 60px);
-}
-.statement p {
-  margin: 0;
-  max-width: 22ch;
-  font-size: clamp(2rem, 4.6vw, 4.4rem);
-  line-height: 1.08;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-.statement .hl {
-  color: var(--accent);
-}
-:root[data-theme='light'] .statement .hl {
-  color: #866400;
-}
-.statement .sw {
-  overflow: visible;
-  transition: opacity 0.25s linear;
-}
-.statement .sw.dim {
-  opacity: 0.2;
 }
 
 /* ---------- area tiles ---------- */
@@ -2389,16 +2254,6 @@ html.lenis body {
   .reel-hint:before {
     content: 'Swipe · ';
   }
-  .field-hud {
-    display: none;
-  }
-}
-@media (max-width: 800px) {
-  .hero-field {
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 30%);
-    mask-image: linear-gradient(to top, transparent 0%, #000 30%);
-    opacity: 0.55;
-  }
 }
 @media (max-width: 600px) {
   .area-grid {
@@ -2424,7 +2279,6 @@ html.lenis body {
 }
 @media (prefers-reduced-motion: reduce) {
   .mtrack,
-  .trace-active,
   .visual-chart .chart-line,
   .visual-chart circle,
   .pipeline-node,
@@ -2434,11 +2288,7 @@ html.lenis body {
   .system-connector:before {
     animation: none !important;
   }
-  .trace-active,
   .visual-chart .chart-line {
     stroke-dashoffset: 0;
-  }
-  .statement .sw.dim {
-    opacity: 1;
   }
 }
