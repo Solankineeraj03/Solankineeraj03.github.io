@@ -1,12 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectVisual from '../../components/ProjectVisual.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
 import { ArrowLeft, ArrowUpRight, GitBranch, BookOpen } from '@lucide/astro';
-import { projects, benchmark } from '../../data/content';
+import { projects, benchmark, categoryById } from '../../data/content';
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
 }
 const { project } = Astro.props;
+const related = projects
+  .filter(
+    (p) => p.slug !== project.slug && p.categories.some((c) => project.categories.includes(c)),
+  )
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -15,16 +21,22 @@ const { project } = Astro.props;
   path={`/projects/${project.slug}/`}
 >
   <article class="case-study shell">
-    <a class="back-link" href="/#work"><ArrowLeft size={16} /> All projects</a><div
+    <a class="back-link" href="/work/"><ArrowLeft size={16} /> All projects</a><div
       class="case-hero"
     >
       <div>
-        <p class="eyebrow">CASE STUDY / {project.kicker.toUpperCase()}</p><h1>{project.name}</h1><p
-          class="case-summary"
-        >
+        <p class="eyebrow">CASE STUDY / {project.kicker.toUpperCase()}</p><h1 data-split>
+          {project.name}
+        </h1><p class="case-summary">
           {project.summary}
         </p><div class="tags">
-          {project.topics.map((topic: string) => <span>{topic}</span>)}
+          {
+            project.categories.map((id) => (
+              <a class="tag-link" href={`/work/${id}/`}>
+                {categoryById[id].name}
+              </a>
+            ))
+          }
         </div><div class="case-cta">
           <a
             class="button button-primary"
@@ -39,12 +51,12 @@ const { project } = Astro.props;
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Read paper <BookOpen size={17} />
+                {project.linkLabel ?? 'Read paper'} <BookOpen size={17} />
               </a>
             )
           }
         </div>
-      </div><ProjectVisual visual={project.visual} />
+      </div><ProjectVisual project={project} />
     </div><div class="case-body">
       <div class="case-aside">
         <span>PROJECT BRIEF</span><div>
@@ -182,8 +194,19 @@ const { project } = Astro.props;
           )
         }
       </div>
-    </div><div class="case-next">
-      <span>MORE WORK</span><a href="/#work">Explore all projects <ArrowUpRight size={18} /></a>
+    </div>{
+      related.length > 0 && (
+        <section class="related">
+          <p class="eyebrow">RELATED PROJECTS</p>
+          <div class="project-grid">
+            {related.map((p, i) => (
+              <ProjectCard project={p} index={i} />
+            ))}
+          </div>
+        </section>
+      )
+    }<div class="case-next">
+      <span>MORE WORK</span><a href="/work/">Explore all projects <ArrowUpRight size={18} /></a>
     </div>
   </article>
   <script>

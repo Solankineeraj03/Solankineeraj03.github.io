@@ -1,0 +1,36 @@
+---
+import { ArrowRight, GitBranch } from '@lucide/astro';
+import ProjectVisual from './ProjectVisual.astro';
+import { categoryById, type Project } from '../data/content';
+const { project, index } = Astro.props as { project: Project; index: number };
+---
+
+<article class="project-card" data-reveal>
+  <ProjectVisual project={project} />
+  <div class="project-body">
+    <div class="card-meta">
+      <span>{project.kicker}</span><span>{project.status}</span>
+    </div>
+    <div class="project-heading">
+      <h3>{project.name}</h3><span>{String(index + 1).padStart(2, '0')}</span>
+    </div>
+    <p>{project.summary}</p>
+    <div class="tags">
+      {
+        project.categories.map((id) => (
+          <a class="tag-link" href={`/work/${id}/`}>
+            {categoryById[id].name}
+          </a>
+        ))
+      }
+    </div>
+    <div class="project-links">
+      <a href={`/projects/${project.slug}/`}>Explore case study <ArrowRight size={16} /></a><a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${project.name} on GitHub`}><GitBranch size={18} /></a
+      >
+    </div>
+  </div>
+</article>

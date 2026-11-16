@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryNav from '../../components/CategoryNav.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { ArrowLeft, ArrowUpRight } from '@lucide/astro';
+import { links, projects } from '../../data/content';
+---
+
+<BaseLayout
+  title="All projects — Neeraj Solanki"
+  description="Every project by Neeraj Solanki, grouped by area: inference and serving, LLM systems, edge AI, healthcare AI, applied ML, and full-stack apps."
+  path="/work/"
+>
+  <section class="section shell work-page">
+    <a class="back-link" href="/#work"><ArrowLeft size={16} /> Home</a>
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">ALL WORK / {projects.length} PROJECTS</p>
+        <h1 class="page-title" data-split>Everything I’ve built, by area.</h1>
+        <p class="section-subtitle">
+          Pick an area to see the projects in it, or scroll through all of them below.
+        </p>
+      </div><a class="inline-link" href={links.github} target="_blank" rel="noopener noreferrer"
+        >GitHub profile <ArrowUpRight size={17} /></a
+      >
+    </div>
+    <CategoryNav />
+    <h2 class="list-title">All projects</h2>
+    <div class="project-grid">
+      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+    </div>
+  </section>
+</BaseLayout>

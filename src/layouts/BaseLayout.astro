@@ -12,7 +12,7 @@ import {
   X,
   Menu,
 } from '@lucide/astro';
-import { links, projects, publications } from '../data/content';
+import { links, projects, publications, categories } from '../data/content';
 const { title, description, path = '/' } = Astro.props;
 const canonical = new URL(path, Astro.site).toString();
 const image = new URL('/social-card.png', Astro.site).toString();
@@ -90,8 +90,8 @@ const person = {
     <header class="site-header" id="top">
       <div class="shell header-inner">
         <a class="brand" href="/"
-          ><span class="brand-mark" aria-hidden="true">N</span><span
-            class="brand-text">NEERAJ SOLANKI<small>ML SYSTEMS / RESEARCH</small></span
+          ><span class="brand-mark" aria-hidden="true">N</span><span class="brand-text"
+            >NEERAJ SOLANKI<small>ML SYSTEMS / RESEARCH</small></span
           ></a
         >
         <nav class="desktop-nav" aria-label="Primary">
@@ -175,15 +175,25 @@ const person = {
         <a href="/#work" data-search="projects work"
           ><span>Selected projects</span><ArrowUpRight size={16} /></a
         >
-        <a href="/projects/inferscope/" data-search="inferscope inference benchmarking"
-          ><span>InferScope case study</span><ArrowUpRight size={16} /></a
+        <a href="/work/" data-search="all projects work areas"
+          ><span>All projects by area</span><ArrowUpRight size={16} /></a
         >
-        <a href="/projects/chai/" data-search="chai hardware edge"
-          ><span>CHAI case study</span><ArrowUpRight size={16} /></a
-        >
-        <a href="/projects/flare/" data-search="flare federated learning"
-          ><span>FLARE case study</span><ArrowUpRight size={16} /></a
-        >
+        {
+          categories.map((c) => (
+            <a href={`/work/${c.id}/`} data-search={`area ${c.name}`}>
+              <span>{c.name} projects</span>
+              <ArrowUpRight size={16} />
+            </a>
+          ))
+        }
+        {
+          projects.map((p) => (
+            <a href={`/projects/${p.slug}/`} data-search={`${p.slug} ${p.kicker}`}>
+              <span>{p.name} case study</span>
+              <ArrowUpRight size={16} />
+            </a>
+          ))
+        }
         <a href="/#publications" data-search="publications research papers"
           ><span>Publications</span><ArrowUpRight size={16} /></a
         >
@@ -207,6 +217,9 @@ const person = {
         >
       </div><div class="command-foot">↑ ↓ to move · Enter to open · Esc to close</div>
     </dialog>
+    <script>
+      import '../scripts/motion';
+    </script>
     <script>
       const themeButton = document.querySelector<HTMLButtonElement>('#theme-toggle');
       themeButton?.addEventListener('click', () => {

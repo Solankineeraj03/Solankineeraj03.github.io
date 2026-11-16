@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryNav from '../../components/CategoryNav.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { ArrowLeft } from '@lucide/astro';
+import { categories, projectsIn, type Category } from '../../data/content';
+export function getStaticPaths() {
+  return categories.map((category) => ({ params: { category: category.id }, props: { category } }));
+}
+const { category } = Astro.props as { category: Category };
+const list = projectsIn(category.id);
+---
+
+<BaseLayout
+  title={`${category.name} projects — Neeraj Solanki`}
+  description={category.blurb}
+  path={`/work/${category.id}/`}
+>
+  <section class="section shell work-page">
+    <a class="back-link" href="/work/"><ArrowLeft size={16} /> All areas</a>
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">
+          {`AREA / ${list.length} ${list.length === 1 ? 'PROJECT' : 'PROJECTS'}`}
+        </p>
+        <h1 class="page-title" data-split>{category.name}</h1>
+        <p class="section-subtitle">{category.blurb}</p>
+      </div>
+    </div>
+    <div class="project-grid">
+      {list.map((project, index) => <ProjectCard project={project} index={index} />)}
+    </div>
+    <h2 class="list-title">Other areas</h2>
+    <CategoryNav current={category.id} />
+  </section>
+</BaseLayout>

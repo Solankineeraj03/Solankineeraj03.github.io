@@ -1,0 +1,26 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import { categories, projectsIn, type CategoryId } from '../data/content';
+const { current } = Astro.props as { current?: CategoryId };
+---
+
+<nav class="area-grid" aria-label="Project areas">
+  {
+    categories.map((c, i) => (
+      <a
+        class:list={['area-tile', { current: c.id === current }]}
+        href={`/work/${c.id}/`}
+        aria-current={c.id === current ? 'page' : undefined}
+        data-reveal
+      >
+        <span class="area-index">{String(i + 1).padStart(2, '0')}</span>
+        <span class="area-count">
+          {projectsIn(c.id).length} {projectsIn(c.id).length === 1 ? 'project' : 'projects'}
+        </span>
+        <strong>{c.name}</strong>
+        <small>{c.blurb}</small>
+        <ArrowUpRight size={18} class="area-arrow" />
+      </a>
+    ))
+  }
+</nav>

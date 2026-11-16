@@ -9,3 +9,11 @@ Reviewed 2026-10-08. The newest local resume is `Neeraj_Solanki_Resumei.pdf` (mo
 - Publication names, authors, venues and DOIs were checked against arXiv, Crossref records, and the UIC lab page. Google Scholar returned HTTP 429 during review; its profile is linked but not used as an exclusive factual source.
 - The existing portfolio supplied the headshot. It was converted to WebP and reused. Earlier portfolio performance claims that conflict with the newest resume were excluded.
 - The latest resume includes a radiology platform without a public repository. It is not included among the featured open-source case studies. The brief's suggested fog-computing paper is also omitted to keep the research selection focused.
+
+## 2026-11-16: project areas and additional repositories
+
+- Projects are now grouped into six areas (`categories` in `src/data/content.ts`), each with a page at `/work/<area>/`.
+- Added case studies for Cartograph, PC Diagnostics, Edge Mental Health Agent, Converso, ChurnGuard, Cross-Impact OFI, SmartPay, and Chat App. Every claim and number comes from that repository's public README as of this date. Nothing was rerun for this build.
+- PC Diagnostics is now public, which replaces the earlier note about a radiology platform with no public repository. Its copy keeps the README's limits: RadGraph and F1 scores measure automated agreement, not clinical accuracy, and the project is not for clinical use.
+- Not included: forks (vllm, pytorch-copy, albumy, MLIP_Lab6, mlip-api-lab), coursework (HW-Submission), empty repositories (Epileptic-Seizure-Detection-CNN, WNN, Multi-Precision-Multi-Termination-Neural-Networks), the previous portfolio, the profile README, and a personal site.
+- The hero animation is a simulation drawn in the browser and is labeled as one. Its counters are not measurements.

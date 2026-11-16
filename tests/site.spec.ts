@@ -12,21 +12,26 @@ test('home has working content and downloadable resume', async ({ page, request 
   const resume = await request.get('/resume/Neeraj_Solanki_Resume.pdf');
   expect(resume.ok()).toBeTruthy();
   expect(resume.headers()['content-type']).toContain('pdf');
-  for (const slug of ['inferscope', 'chai', 'flare']) {
+  for (const slug of ['inferscope', 'chai', 'flare', 'cartograph', 'pc-diagnostics', 'chat-app']) {
     const response = await request.get(`/projects/${slug}/`);
     expect(response.ok()).toBeTruthy();
   }
 });
 
-test('project filtering and chart controls work', async ({ page }) => {
+test('project areas link to their projects and chart controls work', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Inference', exact: true }).click();
-  await expect(page.locator('.project-card:visible')).toHaveCount(1);
+  await page
+    .getByRole('navigation', { name: 'Project areas' })
+    .getByRole('link', { name: /Inference & Serving/ })
+    .click();
+  await expect(page).toHaveURL(/\/work\/inference\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Inference & Serving');
+  await expect(page.locator('.project-card')).toHaveCount(3);
   await expect(
-    page.locator('.project-card:visible').getByRole('heading', { name: 'InferScope' }),
+    page.locator('.project-card').getByRole('heading', { name: 'InferScope' }),
   ).toBeVisible();
-  await page.getByRole('button', { name: 'All', exact: true }).click();
-  await expect(page.locator('.project-card:visible')).toHaveCount(3);
+  await page.goto('/work/');
+  await expect(page.locator('.project-card')).toHaveCount(11);
   await page.goto('/projects/inferscope/');
   await page.getByRole('button', { name: 'System throughput' }).click();
   await expect(page.locator('#chart-label')).toHaveText('System output tokens per second');
@@ -77,13 +82,18 @@ test('reduced motion does not hide content or controls', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'InferScope' })).toBeVisible();
 });
 
-test('case studies fit narrow viewports', async ({ page }) => {
+test('case studies and area pages fit narrow viewports', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const slug of ['inferscope', 'chai', 'flare']) {
-    await page.goto(`/projects/${slug}/`);
+  for (const path of [
+    '/projects/inferscope/',
+    '/projects/cartograph/',
+    '/work/',
+    '/work/edge-ai/',
+  ]) {
+    await page.goto(path);
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > window.innerWidth + 1,
     );
-    expect(overflow, `${slug} should fit the viewport`).toBe(false);
+    expect(overflow, `${path} should fit the viewport`).toBe(false);
   }
 });

@@ -2,6 +2,7 @@ import eslint from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import prettier from 'eslint-config-prettier';
+import globals from 'globals';
 
 export default [
   { ignores: ['dist/**', '.astro/**', 'node_modules/**'] },
@@ -22,5 +23,6 @@ export default [
     plugins: { '@typescript-eslint': tsPlugin },
     rules: { ...tsPlugin.configs.recommended.rules },
   },
+  { files: ['src/scripts/**/*.ts'], languageOptions: { globals: globals.browser } },
   prettier,
 ];
