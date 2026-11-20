@@ -6,7 +6,9 @@ test('home has working content and downloadable resume', async ({ page, request 
   await expect(page.getByRole('heading', { name: 'Published work.' })).toBeVisible();
   const sitemap = await request.get('/sitemap.xml');
   expect(sitemap.ok()).toBeTruthy();
-  expect(await sitemap.text()).toContain('/projects/inferscope/');
+  const sitemapText = await sitemap.text();
+  expect(sitemapText).toContain('/projects/inferscope/');
+  expect(sitemapText).toContain('/projects/ai-chip-design/');
   const social = await request.get('/social-card.png');
   expect(social.ok()).toBeTruthy();
   const resume = await request.get('/resume/Neeraj_Solanki_Resume.pdf');
@@ -15,6 +17,16 @@ test('home has working content and downloadable resume', async ({ page, request 
   for (const slug of ['inferscope', 'chai', 'flare', 'cartograph', 'pc-diagnostics', 'chat-app']) {
     const response = await request.get(`/projects/${slug}/`);
     expect(response.ok()).toBeTruthy();
+  }
+  await page.goto('/projects/ai-chip-design/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('AI Accelerator Design');
+  const benchmarks = page.getByRole('region', { name: 'Benchmark results' });
+  await expect(benchmarks.getByRole('img')).toHaveCount(3);
+  for (const asset of await benchmarks.locator('img, a[download]').evaluateAll((elements) =>
+    elements.map((element) => element.getAttribute('src') ?? element.getAttribute('href')!),
+  )) {
+    const response = await request.get(asset);
+    expect(response.ok(), asset).toBeTruthy();
   }
 });
 
@@ -26,12 +38,15 @@ test('project areas link to their projects and chart controls work', async ({ pa
     .click();
   await expect(page).toHaveURL(/\/work\/inference\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Inference & Serving');
-  await expect(page.locator('.project-card')).toHaveCount(3);
+  await expect(page.locator('.project-card')).toHaveCount(4);
   await expect(
     page.locator('.project-card').getByRole('heading', { name: 'InferScope' }),
   ).toBeVisible();
+  await expect(
+    page.locator('.project-card').getByRole('heading', { name: 'AI Accelerator Design' }),
+  ).toBeVisible();
   await page.goto('/work/');
-  await expect(page.locator('.project-card')).toHaveCount(11);
+  await expect(page.locator('.project-card')).toHaveCount(12);
   await page.goto('/projects/inferscope/');
   await page.getByRole('button', { name: 'System throughput' }).click();
   await expect(page.locator('#chart-label')).toHaveText('System output tokens per second');
@@ -86,6 +101,7 @@ test('case studies and area pages fit narrow viewports', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   for (const path of [
     '/projects/inferscope/',
+    '/projects/ai-chip-design/',
     '/projects/cartograph/',
     '/work/',
     '/work/edge-ai/',

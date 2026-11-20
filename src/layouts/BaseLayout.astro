@@ -40,7 +40,7 @@ const person = {
   makesOffer: projects.map((project) => ({
     '@type': 'CreativeWork',
     name: project.name,
-    url: project.github,
+    url: project.github ?? new URL(`/projects/${project.slug}/`, Astro.site).href,
     description: project.summary,
   })),
 };

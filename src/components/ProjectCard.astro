@@ -25,12 +25,19 @@ const { project, index } = Astro.props as { project: Project; index: number };
       }
     </div>
     <div class="project-links">
-      <a href={`/projects/${project.slug}/`}>Explore case study <ArrowRight size={16} /></a><a
-        href={project.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${project.name} on GitHub`}><GitBranch size={18} /></a
-      >
+      <a href={`/projects/${project.slug}/`}>Explore case study <ArrowRight size={16} /></a>
+      {
+        project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.name} on GitHub`}
+          >
+            <GitBranch size={18} />
+          </a>
+        )
+      }
     </div>
   </div>
 </article>

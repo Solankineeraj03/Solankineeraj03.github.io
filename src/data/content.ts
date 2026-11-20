@@ -56,13 +56,21 @@ export type Project = {
   status: string;
   categories: CategoryId[];
   stack: string[];
-  github: string;
+  github?: string;
   link?: string;
   linkLabel?: string;
   featured?: boolean;
   highlight?: { value: string; label: string };
   visual: 'chart' | 'network' | 'flow';
   flow?: { label: string; nodes?: [string, string][] };
+  figures?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    caption: string;
+    data: { href: string; label: string }[];
+  }[];
 };
 
 export const links = {
@@ -96,6 +104,74 @@ export const projects: Project[] = [
       label: 'distinct outputs from one fixed greedy prompt as concurrency rose from 0 to 8',
     },
     visual: 'chart',
+  },
+  {
+    slug: 'ai-chip-design',
+    name: 'AI Accelerator Design',
+    kicker: 'LLM inference hardware',
+    summary:
+      'A verified SystemVerilog KV-cache reader and streaming Qwen attention head, with a chiplet interconnect study grounded in the same cache traffic.',
+    problem:
+      'Autoregressive decode repeatedly reads cached keys and values. Packing them into four bits lowers memory traffic, while unpacking, rescaling, model error, and network congestion can affect the benefit.',
+    approach:
+      'I built a reader with FP16 pass-through and grouped INT4 dequantization, then connected it to a fixed-point attention head with online softmax. I compared two and four dequantization lanes on real Qwen2.5-0.5B tensors and used the measured cache transfer sizes in an equal-bandwidth ring and mesh simulation.',
+    result:
+      'The attention RTL matched its integer reference in 576 timed replays. At 4,096 tokens, the chosen INT4 cache format raised held-out WikiText-2 perplexity from 8.26 to 11.19. The hardware and network experiments measure where its lower memory traffic pays off.',
+    status: 'Verified RTL · architecture study',
+    categories: ['edge-ai', 'inference'],
+    stack: ['SystemVerilog', 'Verilator', 'PyTorch', 'Yosys', 'OpenSTA', 'RapidChiplet', 'BookSim'],
+    featured: true,
+    highlight: {
+      value: '1.80×',
+      label: 'simulated decode-head speedup from four INT4 lanes at 3 B/cycle with 4,096 cached tokens',
+    },
+    visual: 'flow',
+    flow: {
+      label: 'LLM ATTENTION DATAPATH',
+      nodes: [
+        ['KV-cache reader', 'FP16 · INT4'],
+        ['Attention head', 'QK · ONLINE SOFTMAX'],
+        ['Weighted output', '64 FIXED-POINT VALUES'],
+      ],
+    },
+    figures: [
+      {
+        src: '/benchmarks/ai-chip-design/attention-lanes.png',
+        width: 2035,
+        height: 850,
+        alt: 'Four INT4 lanes run about 1.8 times as fast as two from 3 bytes per cycle upward.',
+        caption:
+          'At 3 B/cycle, four lanes cut the 4,096-token attention run from 267,407 to 148,624 cycles. Both variants met a 5 ns clock in pre-layout Nangate45 timing analysis. Four lanes added 0.86% to the mapped area of the head.',
+        data: [
+          { href: '/benchmarks/ai-chip-design/attention-lanes.csv', label: 'Latency data' },
+          { href: '/benchmarks/ai-chip-design/timing-area.csv', label: 'Timing and area data' },
+          { href: '/benchmarks/ai-chip-design/attention-error.csv', label: 'Attention error data' },
+        ],
+      },
+      {
+        src: '/benchmarks/ai-chip-design/kv-reader.png',
+        width: 2280,
+        height: 883,
+        alt: 'The INT4 reader wins up to about 4 bytes per cycle with a fast consumer and 2 with a slower one.',
+        caption:
+          'For one Qwen layer at 4,096 tokens, INT4 cut read traffic from 2 MiB to 768 KiB including scales and padding. The standalone RTL reader broke even near 4 B/cycle when the consumer could accept at least as much.',
+        data: [
+          { href: '/benchmarks/ai-chip-design/kv-reader.csv', label: 'KV reader sweep' },
+          { href: '/benchmarks/ai-chip-design/model-quality.csv', label: 'Model quality data' },
+        ],
+      },
+      {
+        src: '/benchmarks/ai-chip-design/chiplet-interconnect.png',
+        width: 1995,
+        height: 1368,
+        alt: 'BookSim results show lower ring tail latency under hotspot traffic and later saturation with INT4.',
+        caption:
+          'At 0.119 offered FP16 reads per cycle with 80% directed to one memory chiplet, p99 was 778 cycles on the ring and 2,337 on the mesh. Both networks replayed identical requests and had 36 link bandwidth units per direction.',
+        data: [
+          { href: '/benchmarks/ai-chip-design/chiplet-interconnect.csv', label: 'Chiplet sweep' },
+        ],
+      },
+    ],
   },
   {
     slug: 'cartograph',

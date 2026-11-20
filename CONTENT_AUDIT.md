@@ -17,3 +17,8 @@ Reviewed 2026-10-08. The newest local resume is `Neeraj_Solanki_Resumei.pdf` (mo
 - PC Diagnostics is now public, which replaces the earlier note about a radiology platform with no public repository. Its copy keeps the README's limits: RadGraph and F1 scores measure automated agreement, not clinical accuracy, and the project is not for clinical use.
 - Not included: forks (vllm, pytorch-copy, albumy, MLIP_Lab6, mlip-api-lab), coursework (HW-Submission), empty repositories (Epileptic-Seizure-Detection-CNN, WNN, Multi-Precision-Multi-Termination-Neural-Networks), the previous portfolio, the profile README, and a personal site.
 - The hero animation is a simulation drawn in the browser and is labeled as one. Its counters are not measurements.
+
+## 2026-11-20 AI accelerator design
+
+- The case study and public benchmark exports use results from AI chip design commit `d2d33c6`. Cycle counts come from Verilator RTL simulation, timing and area from mapped pre-layout Nangate45 netlists, and network latency from matched BookSim replays.
+- The reported perplexity is from the held-out WikiText-2 evaluation of the selected INT4 cache format. Each figure links to its measurement data.

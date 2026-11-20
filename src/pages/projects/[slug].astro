@@ -38,12 +38,24 @@ const related = projects
             ))
           }
         </div><div class="case-cta">
-          <a
-            class="button button-primary"
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer">View repository <GitBranch size={17} /></a
-          >{
+          {
+            project.github && (
+              <a
+                class="button button-primary"
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View repository <GitBranch size={17} />
+              </a>
+            )
+          }{
+            project.figures?.length && (
+              <a class="button button-primary" href="#benchmark-evidence">
+                View benchmark results <ArrowUpRight size={17} />
+              </a>
+            )
+          }{
             project.link && (
               <a
                 class="button button-outline"
@@ -61,11 +73,16 @@ const related = projects
       <div class="case-aside">
         <span>PROJECT BRIEF</span><div>
           <span>Status</span><strong>{project.status}</strong>
-        </div><div><span>Technologies</span><strong>{project.stack.join(' · ')}</strong></div><div>
-          <span>Source</span><a href={project.github} target="_blank" rel="noopener noreferrer"
-            >GitHub repository <ArrowUpRight size={15} /></a
-          >
-        </div>
+        </div><div><span>Technologies</span><strong>{project.stack.join(' · ')}</strong></div>{
+          project.github && (
+            <div>
+              <span>Source</span>
+              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                GitHub repository <ArrowUpRight size={15} />
+              </a>
+            </div>
+          )
+        }
       </div><div class="case-content">
         <section>
           <p class="eyebrow">01 / THE PROBLEM</p><h2>What needed to change</h2><p>
@@ -76,6 +93,36 @@ const related = projects
         </section><section>
           <p class="eyebrow">03 / EVIDENCE</p><h2>What the evidence says</h2><p>{project.result}</p>
         </section>{
+          project.figures?.length && (
+            <section id="benchmark-evidence" aria-labelledby="benchmark-title">
+              <h2 id="benchmark-title">Benchmark results</h2>
+              {project.figures.map((figure) => (
+                <figure class="case-figure">
+                  <a href={figure.src}>
+                    <img
+                      src={figure.src}
+                      width={figure.width}
+                      height={figure.height}
+                      alt={figure.alt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                  <figcaption>
+                    <p>{figure.caption}</p>
+                    <div class="figure-data">
+                      {figure.data.map((file) => (
+                        <a href={file.href} download>
+                          {file.label} (CSV)
+                        </a>
+                      ))}
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
+            </section>
+          )
+        }{
           project.slug === 'inferscope' && (
             <section class="benchmark-section" id="benchmark">
               <>
@@ -246,3 +293,32 @@ const related = projects
     );
   </script>
 </BaseLayout>
+
+<style>
+  .case-figure {
+    margin: 1.5rem 0 2rem;
+  }
+
+  .case-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.65rem;
+  }
+
+  .case-figure figcaption {
+    margin-top: 0.85rem;
+  }
+
+  .figure-data {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .figure-data a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+</style>
