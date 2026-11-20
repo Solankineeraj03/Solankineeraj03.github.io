@@ -1489,7 +1489,7 @@ code {
     text-align: left;
   }
   .case-hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .case-hero .project-visual {
     max-width: 650px;
@@ -1668,7 +1668,7 @@ code {
     padding-bottom: 55px;
   }
   .case-hero h1 {
-    font-size: 4.5rem;
+    font-size: clamp(2.75rem, 14vw, 4.5rem);
   }
   .case-hero .project-visual {
     height: 220px;
