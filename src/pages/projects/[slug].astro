@@ -50,6 +50,12 @@ const related = projects
               </a>
             )
           }{
+            project.demo && (
+              <a class="button button-primary" href="#walkthrough">
+                Watch the demo <ArrowUpRight size={17} />
+              </a>
+            )
+          }{
             project.figures?.length && (
               <a class="button button-primary" href="#benchmark-evidence">
                 View benchmark results <ArrowUpRight size={17} />
@@ -93,6 +99,32 @@ const related = projects
         </section><section>
           <p class="eyebrow">03 / EVIDENCE</p><h2>What the evidence says</h2><p>{project.result}</p>
         </section>{
+          project.demo && (
+            <section id="walkthrough" aria-labelledby="walkthrough-title">
+              <h2 id="walkthrough-title">Recorded walkthrough</h2>
+              <figure class="case-figure">
+                <video
+                  controls
+                  playsinline
+                  preload="metadata"
+                  poster={project.demo.poster}
+                  width="1920"
+                  height="1080"
+                  aria-label={`${project.name} walkthrough`}
+                >
+                  <source src={project.demo.src} type="video/mp4" />
+                  <track kind="captions" src={project.demo.captions} srclang="en" label="English" />
+                </video>
+                <figcaption>
+                  <p>{project.demo.caption}</p>
+                  <div class="figure-data">
+                    <a href={project.demo.transcript}>Read the transcript</a>
+                  </div>
+                </figcaption>
+              </figure>
+            </section>
+          )
+        }{
           project.figures?.length && (
             <section id="benchmark-evidence" aria-labelledby="benchmark-title">
               <h2 id="benchmark-title">Benchmark results</h2>
@@ -299,11 +331,17 @@ const related = projects
     margin: 1.5rem 0 2rem;
   }
 
-  .case-figure img {
+  .case-figure img,
+  .case-figure video {
     display: block;
     width: 100%;
     height: auto;
     border-radius: 0.65rem;
+  }
+
+  .case-figure video {
+    aspect-ratio: 16 / 9;
+    background: var(--surface-2);
   }
 
   .case-figure figcaption {

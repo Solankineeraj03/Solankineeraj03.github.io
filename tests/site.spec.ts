@@ -9,6 +9,7 @@ test('home has working content and downloadable resume', async ({ page, request 
   const sitemapText = await sitemap.text();
   expect(sitemapText).toContain('/projects/inferscope/');
   expect(sitemapText).toContain('/projects/ai-chip-design/');
+  expect(sitemapText).toContain('/projects/socialagent/');
   const social = await request.get('/social-card.png');
   expect(social.ok()).toBeTruthy();
   const resume = await request.get('/resume/Neeraj_Solanki_Resume.pdf');
@@ -28,6 +29,21 @@ test('home has working content and downloadable resume', async ({ page, request 
     const response = await request.get(asset);
     expect(response.ok(), asset).toBeTruthy();
   }
+  await page.goto('/projects/socialagent/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('SocialAgent');
+  await expect(page.getByRole('link', { name: 'Watch the demo' })).toHaveAttribute('href', '#walkthrough');
+  const video = page.locator('#walkthrough video');
+  const source = await video.locator('source').getAttribute('src');
+  const recording = await request.head(source!);
+  expect(recording.ok()).toBeTruthy();
+  expect(recording.headers()['content-type']).toContain('video/mp4');
+  for (const asset of [
+    await video.getAttribute('poster'),
+    await video.locator('track').getAttribute('src'),
+    await page.getByRole('link', { name: 'Read the transcript' }).getAttribute('href'),
+  ]) {
+    expect((await request.get(asset!)).ok(), asset!).toBeTruthy();
+  }
 });
 
 test('project areas link to their projects and chart controls work', async ({ page }) => {
@@ -46,7 +62,7 @@ test('project areas link to their projects and chart controls work', async ({ pa
     page.locator('.project-card').getByRole('heading', { name: 'AI Accelerator Design' }),
   ).toBeVisible();
   await page.goto('/work/');
-  await expect(page.locator('.project-card')).toHaveCount(12);
+  await expect(page.locator('.project-card')).toHaveCount(13);
   await page.goto('/projects/inferscope/');
   await page.getByRole('button', { name: 'System throughput' }).click();
   await expect(page.locator('#chart-label')).toHaveText('System output tokens per second');
@@ -102,6 +118,7 @@ test('case studies and area pages fit narrow viewports', async ({ page }) => {
   for (const path of [
     '/projects/inferscope/',
     '/projects/ai-chip-design/',
+    '/projects/socialagent/',
     '/projects/cartograph/',
     '/work/',
     '/work/edge-ai/',

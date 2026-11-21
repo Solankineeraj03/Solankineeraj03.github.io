@@ -22,3 +22,8 @@ Reviewed 2026-10-08. The newest local resume is `Neeraj_Solanki_Resumei.pdf` (mo
 
 - The case study and public benchmark exports use results from AI chip design commit `d2d33c6`. Cycle counts come from Verilator RTL simulation, timing and area from mapped pre-layout Nangate45 netlists, and network latency from matched BookSim replays.
 - The reported perplexity is from the held-out WikiText-2 evaluation of the selected INT4 cache format. Each figure links to its measurement data.
+
+## 2026-11-21 SocialAgent
+
+- The description follows the SocialAgent README at commit `fefb072` and the captioned walkthrough of its fictional café. The recording uses the real workspace, CPU-rendered media, and simulated delivery receipts.
+- Published assets are the reviewed walkthrough, its poster, English captions, and transcript.

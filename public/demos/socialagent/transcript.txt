@@ -1,0 +1,23 @@
+Your brand, always in motion
+Meet SocialAgent. This is a real walkthrough of the application, using a fictional neighborhood café. We will turn a rising conversation into three channel drafts, review real media, simulate delivery, and answer a customer. Nothing in this demonstration publishes to a real social account.
+
+Listen before you post
+First, the agent looks for a worthwhile conversation. Iced coffee is gaining interest in our demo data. The evidence panel explains the recent count, the baseline, and the sources. Stale or irrelevant topics can be skipped. This is a reason to create something useful, not a quota to fill.
+
+From evidence to a draft
+We choose Create drafts. A background worker uses the café’s approved facts and brand voice, then creates separate Instagram, YouTube, and LinkedIn versions. It also renders an actual image and video. A draft remains in review until a person approves it.
+
+A real design. Your final say.
+Here is the Instagram draft, with a real branded design and editable copy. The copy draws on approved brand knowledge rather than an invented offer. The reviewer can inspect the references and save a new revision. Editing the content invalidates its previous approval, so an old approval cannot publish a new draft.
+
+Video that is ready to preview
+The YouTube version includes a playable vertical video. This is a real MP4, rendered on the CPU, with text and scene timing. No graphics card is required. Each destination has its own copy and assets, and the video is available to download.
+
+Approve exactly what goes out
+Now we review the LinkedIn version and approve tomorrow’s schedule for each channel. Approval binds the account, content revision, assets, visibility, and time. Each destination is handled independently. YouTube visibility remains explicit; a private upload is never presented as public publication.
+
+A receipt for every destination
+Advancing the demo clock lets the worker process the approved schedules. The calendar now shows a separate simulated receipt for every channel. In live operation, provider checkpoints help recover uploads. An uncertain publication outcome stops for inspection instead of blindly reposting.
+
+The midnight question
+Finally, a customer asks whether the café is open tomorrow. The agent prepares a dated reply using the brand’s local timezone and approved hours. The person reviewing it still presses Approve before it sends. New messages invalidate stale replies. The result is less routine work, with people keeping control.

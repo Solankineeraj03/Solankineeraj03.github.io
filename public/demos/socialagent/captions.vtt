@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.920
+Meet SocialAgent. This is a real walkthrough
+
+00:00:02.920 --> 00:00:05.380
+of the application, using a fictional neighborhood
+
+00:00:05.380 --> 00:00:08.320
+café. We will turn a rising conversation
+
+00:00:08.320 --> 00:00:11.200
+into three channel drafts, review real media,
+
+00:00:11.600 --> 00:00:14.920
+simulate delivery, and answer a customer. Nothing
+
+00:00:14.920 --> 00:00:17.000
+in this demonstration publishes to a real
+
+00:00:17.000 --> 00:00:17.720
+social account.
+
+00:00:18.533 --> 00:00:20.533
+First, the agent looks for a worthwhile
+
+00:00:20.533 --> 00:00:23.833
+conversation. Iced coffee is gaining interest in
+
+00:00:23.833 --> 00:00:26.413
+our demo data. The evidence panel explains
+
+00:00:26.413 --> 00:00:29.133
+the recent count, the baseline, and the
+
+00:00:29.133 --> 00:00:32.913
+sources. Stale or irrelevant topics can be
+
+00:00:32.913 --> 00:00:35.213
+skipped. This is a reason to create
+
+00:00:35.213 --> 00:00:37.793
+something useful, not a quota to fill.
+
+00:00:38.500 --> 00:00:41.640
+We choose Create drafts. A background worker
+
+00:00:41.640 --> 00:00:44.120
+uses the café’s approved facts and brand
+
+00:00:44.120 --> 00:00:47.420
+voice, then creates separate Instagram, YouTube, and
+
+00:00:47.420 --> 00:00:50.160
+LinkedIn versions. It also renders an actual
+
+00:00:50.160 --> 00:00:52.720
+image and video. A draft remains in
+
+00:00:52.720 --> 00:00:54.560
+review until a person approves it.
+
+00:00:55.200 --> 00:00:57.560
+Here is the Instagram draft, with a
+
+00:00:57.560 --> 00:01:01.220
+real branded design and editable copy. The
+
+00:01:01.220 --> 00:01:03.720
+copy draws on approved brand knowledge rather
+
+00:01:03.720 --> 00:01:06.320
+than an invented offer. The reviewer can
+
+00:01:06.320 --> 00:01:08.400
+inspect the references and save a new
+
+00:01:08.400 --> 00:01:12.440
+revision. Editing the content invalidates its previous
+
+00:01:12.440 --> 00:01:15.520
+approval, so an old approval cannot publish
+
+00:01:15.520 --> 00:01:16.100
+a new draft.
+
+00:01:16.933 --> 00:01:19.433
+The YouTube version includes a playable vertical
+
+00:01:19.433 --> 00:01:22.933
+video. This is a real MP4, rendered
+
+00:01:22.933 --> 00:01:25.593
+on the CPU, with text and scene
+
+00:01:25.593 --> 00:01:29.033
+timing. No graphics card is required. Each
+
+00:01:29.033 --> 00:01:31.613
+destination has its own copy and assets,
+
+00:01:31.793 --> 00:01:33.833
+and the video is available to download.
+
+00:01:34.900 --> 00:01:36.960
+Now we review the LinkedIn version and
+
+00:01:36.960 --> 00:01:40.020
+approve tomorrow’s schedule for each channel. Approval
+
+00:01:40.020 --> 00:01:43.780
+binds the account, content revision, assets, visibility,
+
+00:01:44.300 --> 00:01:47.420
+and time. Each destination is handled independently.
+
+00:01:48.240 --> 00:01:51.560
+YouTube visibility remains explicit; a private upload
+
+00:01:51.560 --> 00:01:53.940
+is never presented as public publication.
+
+00:01:54.800 --> 00:01:56.900
+Advancing the demo clock lets the worker
+
+00:01:56.900 --> 00:01:59.800
+process the approved schedules. The calendar now
+
+00:01:59.800 --> 00:02:02.120
+shows a separate simulated receipt for every
+
+00:02:02.120 --> 00:02:05.700
+channel. In live operation, provider checkpoints help
+
+00:02:05.700 --> 00:02:09.380
+recover uploads. An uncertain publication outcome stops
+
+00:02:09.380 --> 00:02:11.840
+for inspection instead of blindly reposting.
+
+00:02:12.533 --> 00:02:15.553
+Finally, a customer asks whether the café
+
+00:02:15.553 --> 00:02:18.793
+is open tomorrow. The agent prepares a
+
+00:02:18.793 --> 00:02:21.753
+dated reply using the brand’s local timezone
+
+00:02:21.753 --> 00:02:25.093
+and approved hours. The person reviewing it
+
+00:02:25.093 --> 00:02:28.613
+still presses Approve before it sends. New
+
+00:02:28.613 --> 00:02:32.533
+messages invalidate stale replies. The result is
+
+00:02:32.533 --> 00:02:35.593
+less routine work, with people keeping control.

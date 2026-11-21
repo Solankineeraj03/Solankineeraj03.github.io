@@ -63,6 +63,13 @@ export type Project = {
   highlight?: { value: string; label: string };
   visual: 'chart' | 'network' | 'flow';
   flow?: { label: string; nodes?: [string, string][] };
+  demo?: {
+    src: string;
+    poster: string;
+    captions: string;
+    transcript: string;
+    caption: string;
+  };
   figures?: {
     src: string;
     width: number;
@@ -172,6 +179,40 @@ export const projects: Project[] = [
         ],
       },
     ],
+  },
+  {
+    slug: 'socialagent',
+    name: 'SocialAgent',
+    kicker: 'Approval-first social media operations',
+    summary:
+      'A workspace that turns trend evidence into channel-specific drafts, renders images and video, and holds publishing and inbox replies for human review.',
+    problem:
+      'Teams need to review the actual content, account, and delivery time before a post goes out. Edits can invalidate a review, and retrying after an ambiguous provider response can publish a duplicate.',
+    approach:
+      'I built a Next.js workspace with a PostgreSQL-backed worker and CPU media rendering through Sharp and FFmpeg. Approvals bind to the exact revision, assets, destination, visibility, and schedule. The worker preserves delivery checkpoints and holds uncertain outcomes for review.',
+    result:
+      'The recorded demo follows a fictional café from trend evidence to three separate Instagram, YouTube, and LinkedIn drafts, then through simulated delivery receipts and an approved inbox reply.',
+    status: 'Working demo · simulated publishing',
+    categories: ['llm-systems', 'full-stack'],
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Sharp', 'FFmpeg', 'Docker'],
+    featured: true,
+    visual: 'flow',
+    flow: {
+      label: 'CONTENT REVIEW WORKFLOW',
+      nodes: [
+        ['Trend evidence', 'SOURCES · BRAND FACTS'],
+        ['Channel drafts', 'COPY · IMAGE · VIDEO'],
+        ['Human approval', 'REVISION · DESTINATION'],
+      ],
+    },
+    demo: {
+      src: '/demos/socialagent/walkthrough.mp4',
+      poster: '/demos/socialagent/poster.jpg',
+      captions: '/demos/socialagent/captions.vtt',
+      transcript: '/demos/socialagent/transcript.txt',
+      caption:
+        'This 2:36 recording uses the actual application with a fictional café, simulated social delivery, and AI-generated narration.',
+    },
   },
   {
     slug: 'cartograph',
